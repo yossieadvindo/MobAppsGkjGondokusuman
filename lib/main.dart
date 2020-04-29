@@ -3,6 +3,8 @@ import 'package:gkjgondokusuman/HomePage.dart';
 import 'package:gkjgondokusuman/Login.dart';
 import 'package:gkjgondokusuman/splashscreen.dart';
 
+import 'HomePage.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
       home: Splash(),
       
       routes: <String, WidgetBuilder>{
-        '/home': (context) => Login(),
+        '/home': (context) => Home(),
       },
     );
   }
