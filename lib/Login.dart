@@ -8,7 +8,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
+    //double width = MediaQuery.of(context).size.width;
     return Scaffold(
         body: Column(
       mainAxisAlignment: MainAxisAlignment.center,

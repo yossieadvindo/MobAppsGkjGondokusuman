@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gkjgondokusuman/HomePage.dart';
-import 'package:gkjgondokusuman/Login.dart';
+//import 'package:gkjgondokusuman/Login.dart';
 import 'package:gkjgondokusuman/splashscreen.dart';
 
 import 'HomePage.dart';
