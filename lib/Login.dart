@@ -29,7 +29,7 @@ class _LoginState extends State<Login> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text('USERNAME, NIP, atau Email'),
+                Text('Username/NIP/Email'),
                 SizedBox(
                   height: 5,
                 ),
@@ -42,7 +42,7 @@ class _LoginState extends State<Login> {
                       focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.blue))),
                   validator: (val) =>
-                      val.isNotEmpty ? null : 'Task Should Not Be empty',
+                      val.isNotEmpty ? null : 'Username/NIP/Email tidak boleh kosong',
                 ),
                 SizedBox(
                   height: 10,
@@ -60,7 +60,7 @@ class _LoginState extends State<Login> {
                       focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.blue))),
                   validator: (val) =>
-                      val.isNotEmpty ? null : 'Task Should Not Be empty',
+                      val.isNotEmpty ? null : 'Password tidak boleh kosong',
                 ),
                 SizedBox(
                   height: 20,

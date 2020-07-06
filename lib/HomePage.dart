@@ -39,7 +39,9 @@ class _HomeState extends State<Home> {
               icon: Icon(Icons.settings),
               color: Color(0xffEAB24C),
               iconSize: 30,
-              onPressed: () async {},
+              onPressed: () async {
+                Navigator.pushNamed(context, '/setting');
+              },
             ),
           ],
         ),
@@ -185,14 +187,16 @@ class _HomeState extends State<Home> {
                                   icon: Icon(Icons.person),
                                   color: Color(0xff2BAECB),
                                   iconSize: 30,
-                                  onPressed: () async {},
+                                  onPressed: () async {
+                                    Navigator.pushNamed(context, '/akun');
+                                  },
                                 ),
                               ),
                               SizedBox(
                                 height: 10.0,
                               ),
                               Text(
-                                "Akun",
+                                "Data Diri",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black54),

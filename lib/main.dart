@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gkjgondokusuman/HomePage.dart';
+import 'package:gkjgondokusuman/Setting.dart';
+import 'package:gkjgondokusuman/details-akun.dart';
 //import 'package:gkjgondokusuman/Login.dart';
 import 'package:gkjgondokusuman/splashscreen.dart';
 
@@ -17,6 +19,8 @@ class MyApp extends StatelessWidget {
       
       routes: <String, WidgetBuilder>{
         '/home': (context) => Home(),
+        '/akun': (context) => DetailsAkun(),
+        '/setting': (context) => Setting(),
       },
     );
   }
