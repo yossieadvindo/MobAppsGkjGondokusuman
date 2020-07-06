@@ -51,17 +51,17 @@ class _DetailsAkunState extends State<DetailsAkun> {
     }
   }
 
-    jarak() {
+  jarak() {
     return SizedBox(
       height: 10.0,
     );
   }
 
-
   DateTime selectedTgl = DateTime.now();
   DateTime datePick;
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     Future pickDate() async {
       final selectedDate = await _selectDateTime(context);
       if (selectedDate == null) return;
@@ -507,7 +507,7 @@ class _DetailsAkunState extends State<DetailsAkun> {
             ),
           ),
           jarak(),
-            Container(
+          Container(
             width: 300,
             height: 200,
             child: TextFormField(
@@ -536,6 +536,24 @@ class _DetailsAkunState extends State<DetailsAkun> {
                 hintText: "Alamat Rumah",
               ),
             ),
+          ),
+          RaisedButton(
+            textColor: Colors.white,
+            color: icon,
+            child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                width: width * 0.9,
+                child: Text(
+                  'Submit',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20.0,
+                  ),
+                )),
+            onPressed: () async => {
+              Navigator.pop(context),
+            },
           ),
         ],
       ),

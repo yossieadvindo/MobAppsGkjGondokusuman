@@ -7,7 +7,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  String nama = "Yossie Ruben";
+  String nama = "Yossie Ruben Advindo";
   int _current = 0;
   List visiMisi = [
     'assets/visi.png',
@@ -65,24 +65,50 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 25.0, vertical: 25.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 15.0,
+                  padding: const EdgeInsets.only(top: 25.0, left: 15.0),
+                  child: Positioned(
+                    child: Container(
+                      child: Row(
+                        children: <Widget>[
+                          ClipOval(
+                            child: new SizedBox(
+                              width: 70.0,
+                              height: 70.0,
+                              child: Image.network(
+                                "https://images.unsplash.com/photo-1502164980785-f8aa41d53611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 20.0,
+                          ),
+                          Expanded(
+                              child: Container(
+                            width: 500.0,
+                            //height: 200.0,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  "$nama",
+                                  style: TextStyle(
+                                      fontSize: 24.0,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  "Wilayah 90",
+                                  style: TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.normal),
+                                ),
+                              ],
+                            ),
+                          )),
+                        ],
                       ),
-                      Text(
-                        "Selamat datang,",
-                        style: TextStyle(fontSize: 14),
-                      ),
-                      Text(
-                        nama,
-                        style: TextStyle(fontSize: 24),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
                 Padding(
