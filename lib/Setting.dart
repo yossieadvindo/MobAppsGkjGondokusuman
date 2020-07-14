@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gkjgondokusuman/Login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Setting extends StatefulWidget {
   @override
@@ -8,12 +10,38 @@ class Setting extends StatefulWidget {
 
 class _SettingState extends State<Setting> {
   Color background = Color(0xffFAFAFA);
-  Color icon = Color(0xffEAB24C);
+  Color icon = Colors.blue;
   Color border_focus = Colors.black45;
   jarak() {
     return SizedBox(
       height: 10.0,
     );
+  }
+
+  var value;
+  getPref() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    setState(() {
+      value = pref.getInt("value");
+      
+    });
+  }
+
+  logout() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    setState(() {
+      value = 0;
+
+      Navigator.pushReplacement(this.context,
+          MaterialPageRoute(builder: (BuildContext context) => Login()));
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getPref();
   }
 
   @override
@@ -103,7 +131,9 @@ class _SettingState extends State<Setting> {
           jarak(),
           RaisedButton(
             elevation: 0.0,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/gantiPassword');
+            },
             color: background,
             padding: EdgeInsets.all(0.0),
             child: Padding(
@@ -128,11 +158,13 @@ class _SettingState extends State<Setting> {
                             fontWeight: FontWeight.normal,
                             color: Colors.black),
                       ),
-                      Text("Digunakan untuk mengubah kata sandi akun",
-                      style: TextStyle(
+                      Text(
+                        "Digunakan untuk mengubah kata sandi akun",
+                        style: TextStyle(
                             fontSize: 14.0,
                             fontWeight: FontWeight.bold,
-                            color: border_focus),)
+                            color: border_focus),
+                      )
                     ],
                   )
                 ],
@@ -142,7 +174,9 @@ class _SettingState extends State<Setting> {
           jarak(),
           RaisedButton(
             elevation: 0.0,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/kritikSaran');
+            },
             color: background,
             padding: EdgeInsets.all(0.0),
             child: Padding(
@@ -167,11 +201,13 @@ class _SettingState extends State<Setting> {
                             fontWeight: FontWeight.normal,
                             color: Colors.black),
                       ),
-                      Text("Digunakan untuk mengubah kata sandi akun",
-                      style: TextStyle(
+                      Text(
+                        "Untuk mengirimkan Kritik dan Saran",
+                        style: TextStyle(
                             fontSize: 14.0,
                             fontWeight: FontWeight.bold,
-                            color: border_focus),)
+                            color: border_focus),
+                      )
                     ],
                   )
                 ],
@@ -206,13 +242,52 @@ class _SettingState extends State<Setting> {
                             fontWeight: FontWeight.normal,
                             color: Colors.black),
                       ),
-                      Text("Digunakan untuk mengubah kata sandi akun",
-                      style: TextStyle(
+                      Text(
+                        "Digunakan untuk mengubah kata sandi akun",
+                        style: TextStyle(
                             fontSize: 14.0,
                             fontWeight: FontWeight.bold,
-                            color: border_focus),)
+                            color: border_focus),
+                      )
                     ],
                   )
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            child: Container(
+              height: 0.5,
+              width: 130.0,
+              color: border_focus,
+            ),
+          ),
+          RaisedButton(
+            elevation: 0.0,
+            onPressed: () {
+              logout();
+            },
+            color: background,
+            padding: EdgeInsets.all(0.0),
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Row(
+                children: <Widget>[
+                  Icon(
+                    FontAwesomeIcons.lockOpen,
+                    color: icon,
+                  ),
+                  SizedBox(
+                    width: 20.0,
+                  ),
+                  Text(
+                    "Keluar",
+                    style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.normal,
+                        color: Colors.black),
+                  ),
                 ],
               ),
             ),

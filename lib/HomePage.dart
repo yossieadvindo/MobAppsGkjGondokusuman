@@ -1,13 +1,19 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:gkjgondokusuman/Login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
+  // String nama = "";
+  // String id = "";
+  // Home({this.id,this.nama});
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  String nama = "Yossie Ruben Advindo";
+  String nama = "";
+  String id = "";
   int _current = 0;
   List visiMisi = [
     'assets/visi.png',
@@ -21,273 +27,309 @@ class _HomeState extends State<Home> {
     return result;
   }
 
+  var value;
+  getPref() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    setState(() {
+      value = pref.getInt("value");
+      nama = pref.getString("username");
+      // value == 1
+      //     ? Navigator.pushReplacement(this.context,
+      //         MaterialPageRoute(builder: (BuildContext context) => Home()))
+      //     : Navigator.pushReplacement(this.context,
+      //         MaterialPageRoute(builder: (BuildContext context) => Login()));
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getPref();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xffDDE8EC),
-        elevation: 0,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Image(
-              image: AssetImage('assets/logo_black.png'),
-              width: 200.0,
-            ),
-            IconButton(
-              padding: EdgeInsets.all(15.0),
-              icon: Icon(Icons.settings),
-              color: Color(0xffEAB24C),
-              iconSize: 30,
-              onPressed: () async {
-                Navigator.pushNamed(context, '/setting');
-              },
-            ),
-          ],
+        appBar: AppBar(
+          backgroundColor: Color(0xffDDE8EC),
+          elevation: 0,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Image(
+                image: AssetImage('assets/logo_black.png'),
+                width: 200.0,
+              ),
+              IconButton(
+                padding: EdgeInsets.all(15.0),
+                icon: Icon(Icons.settings),
+                color: Color(0xffEAB24C),
+                iconSize: 30,
+                onPressed: () async {
+                  Navigator.pushNamed(context, '/setting');
+                },
+              ),
+            ],
+          ),
         ),
-      ),
-      backgroundColor: Color(0xffFAFAFA),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        backgroundColor: Color(0xffFAFAFA),
+        body: ListView(
           children: <Widget>[
-            Stack(
-              children: <Widget>[
-                ClipPath(
-                  clipper: CustomShapeClipper(),
-                  child: Container(
-                    height: 240.0,
-                    decoration: BoxDecoration(color: Color(0xffDDE8EC)),
-                    child: Image.asset(
-                      'assets/bg_appbar.png',
-                      fit: BoxFit.fitHeight,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 25.0, left: 15.0),
-                  child: Positioned(
-                    child: Container(
-                      child: Row(
-                        children: <Widget>[
-                          ClipOval(
-                            child: new SizedBox(
-                              width: 70.0,
-                              height: 70.0,
-                              child: Image.network(
-                                "https://images.unsplash.com/photo-1502164980785-f8aa41d53611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-                                fit: BoxFit.fill,
-                              ),
+            SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Stack(
+                    children: <Widget>[
+                      ClipPath(
+                        clipper: CustomShapeClipper(),
+                        child: Container(
+                          height: 240.0,
+                          decoration: BoxDecoration(color: Color(0xffDDE8EC)),
+                          child: Image.asset(
+                            'assets/bg_appbar.png',
+                            fit: BoxFit.fitHeight,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 25.0, left: 15.0),
+                        child: Positioned(
+                          child: Container(
+                            child: Row(
+                              children: <Widget>[
+                                ClipOval(
+                                  child: new SizedBox(
+                                    width: 70.0,
+                                    height: 70.0,
+                                    child: Image.network(
+                                      "https://images.unsplash.com/photo-1502164980785-f8aa41d53611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 20.0,
+                                ),
+                                Expanded(
+                                    child: Container(
+                                  width: 500.0,
+                                  //height: 200.0,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        "$nama",
+                                        style: TextStyle(
+                                            fontSize: 24.0,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        "Wilayah 90",
+                                        style: TextStyle(
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.normal),
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                              ],
                             ),
                           ),
-                          SizedBox(
-                            width: 20.0,
-                          ),
-                          Expanded(
-                              child: Container(
-                            width: 500.0,
-                            //height: 200.0,
-                            child: Column(
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsets.only(top: 150.0, right: 5.0, left: 5.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            CarouselSlider(
+                              height: 125,
+                              initialPage: 0,
+                              enlargeCenterPage: true,
+                              autoPlay: true,
+                              reverse: false,
+                              enableInfiniteScroll: false,
+                              autoPlayInterval: Duration(seconds: 5),
+                              autoPlayAnimationDuration:
+                                  Duration(milliseconds: 10000),
+                              autoPlayCurve: Curves.fastOutSlowIn,
+                              pauseAutoPlayOnTouch: Duration(seconds: 10),
+                              scrollDirection: Axis.horizontal,
+                              onPageChanged: (index) {
+                                setState(() {
+                                  _current = index;
+                                });
+                              },
+                              items: visiMisi.map((imgUrl) {
+                                return Builder(
+                                  builder: (BuildContext context) {
+                                    return Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      margin:
+                                          EdgeInsets.symmetric(horizontal: 5.0),
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(20.0)),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.black
+                                                    .withOpacity(0.1),
+                                                offset: Offset(0.0, 3.0),
+                                                blurRadius: 15.0)
+                                          ]),
+                                      child: Image.asset(
+                                        imgUrl,
+                                        fit: BoxFit.fill,
+                                      ),
+                                    );
+                                  },
+                                );
+                              }).toList(),
+                            ),
+                            SizedBox(
+                              height: 7.0,
+                            ),
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children:
+                                  mapCarousel<Widget>(visiMisi, (index, url) {
+                                return Container(
+                                  width: 10.0,
+                                  height: 10.0,
+                                  margin: EdgeInsets.symmetric(
+                                      vertical: 10.0, horizontal: 2.0),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: _current == index
+                                        ? Color(0xffB5574F)
+                                        : Color(0xffEAB24C),
+                                  ),
+                                );
+                              }),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            top: 325.0, right: 25.0, left: 25.0, bottom: 10.0),
+                        child: Container(
+                          width: double.infinity,
+                          height: 150.0,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    offset: Offset(0.0, 3.0),
+                                    blurRadius: 15.0)
+                              ]),
+                          child: Padding(
+                            padding: EdgeInsets.all(20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: <Widget>[
-                                Text(
-                                  "$nama",
-                                  style: TextStyle(
-                                      fontSize: 24.0,
-                                      fontWeight: FontWeight.bold),
+                                Column(
+                                  children: <Widget>[
+                                    Material(
+                                      borderRadius:
+                                          BorderRadius.circular(100.0),
+                                      color: Color(0xffF0F5F7),
+                                      child: IconButton(
+                                        padding: EdgeInsets.all(15.0),
+                                        icon: Icon(Icons.person),
+                                        color: Color(0xff2BAECB),
+                                        iconSize: 30,
+                                        onPressed: () async {
+                                          Navigator.pushNamed(context, '/akun');
+                                        },
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10.0,
+                                    ),
+                                    Text(
+                                      "Data Diri",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black54),
+                                    )
+                                  ],
                                 ),
-                                Text(
-                                  "Wilayah 90",
-                                  style: TextStyle(
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.normal),
+                                Column(
+                                  children: <Widget>[
+                                    Material(
+                                      borderRadius:
+                                          BorderRadius.circular(100.0),
+                                      color: Color(0xffF0F5F7),
+                                      child: IconButton(
+                                        padding: EdgeInsets.all(15.0),
+                                        icon: Icon(Icons.note),
+                                        color: Color(0xffEAB24C),
+                                        iconSize: 30,
+                                        onPressed: () async {
+                                          Navigator.pushNamed(
+                                              context, '/downloadPage');
+                                        },
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10.0,
+                                    ),
+                                    Text(
+                                      "Warta Jemaat",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black54),
+                                    )
+                                  ],
+                                ),
+                                Column(
+                                  children: <Widget>[
+                                    Material(
+                                      borderRadius:
+                                          BorderRadius.circular(100.0),
+                                      color: Color(0xffF0F5F7),
+                                      child: IconButton(
+                                        padding: EdgeInsets.all(15.0),
+                                        icon: Icon(Icons.list),
+                                        color: Color(0xffB5574F),
+                                        iconSize: 30,
+                                        onPressed: () async {},
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10.0,
+                                    ),
+                                    Text(
+                                      "Daftar Majelis",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black54),
+                                    )
+                                  ],
                                 ),
                               ],
                             ),
-                          )),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 150.0, right: 5.0, left: 5.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      CarouselSlider(
-                        height: 125,
-                        initialPage: 0,
-                        enlargeCenterPage: true,
-                        autoPlay: true,
-                        reverse: false,
-                        enableInfiniteScroll: false,
-                        autoPlayInterval: Duration(seconds: 5),
-                        autoPlayAnimationDuration:
-                            Duration(milliseconds: 10000),
-                        autoPlayCurve: Curves.fastOutSlowIn,
-                        pauseAutoPlayOnTouch: Duration(seconds: 10),
-                        scrollDirection: Axis.horizontal,
-                        onPageChanged: (index) {
-                          setState(() {
-                            _current = index;
-                          });
-                        },
-                        items: visiMisi.map((imgUrl) {
-                          return Builder(
-                            builder: (BuildContext context) {
-                              return Container(
-                                width: MediaQuery.of(context).size.width,
-                                margin: EdgeInsets.symmetric(horizontal: 5.0),
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20.0)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.black.withOpacity(0.1),
-                                          offset: Offset(0.0, 3.0),
-                                          blurRadius: 15.0)
-                                    ]),
-                                child: Image.asset(
-                                  imgUrl,
-                                  fit: BoxFit.fill,
-                                ),
-                              );
-                            },
-                          );
-                        }).toList(),
-                      ),
-                      SizedBox(
-                        height: 7.0,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: mapCarousel<Widget>(visiMisi, (index, url) {
-                          return Container(
-                            width: 10.0,
-                            height: 10.0,
-                            margin: EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 2.0),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: _current == index
-                                  ? Color(0xffB5574F)
-                                  : Color(0xffEAB24C),
-                            ),
-                          );
-                        }),
+                          ),
+                        ),
                       ),
                     ],
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      top: 325.0, right: 25.0, left: 25.0, bottom: 10.0),
-                  child: Container(
-                    width: double.infinity,
-                    height: 150.0,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              offset: Offset(0.0, 3.0),
-                              blurRadius: 15.0)
-                        ]),
-                    child: Padding(
-                      padding: EdgeInsets.all(20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          Column(
-                            children: <Widget>[
-                              Material(
-                                borderRadius: BorderRadius.circular(100.0),
-                                color: Color(0xffF0F5F7),
-                                child: IconButton(
-                                  padding: EdgeInsets.all(15.0),
-                                  icon: Icon(Icons.person),
-                                  color: Color(0xff2BAECB),
-                                  iconSize: 30,
-                                  onPressed: () async {
-                                    Navigator.pushNamed(context, '/akun');
-                                  },
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10.0,
-                              ),
-                              Text(
-                                "Data Diri",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black54),
-                              )
-                            ],
-                          ),
-                          Column(
-                            children: <Widget>[
-                              Material(
-                                borderRadius: BorderRadius.circular(100.0),
-                                color: Color(0xffF0F5F7),
-                                child: IconButton(
-                                  padding: EdgeInsets.all(15.0),
-                                  icon: Icon(Icons.note),
-                                  color: Color(0xffEAB24C),
-                                  iconSize: 30,
-                                  onPressed: () async {},
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10.0,
-                              ),
-                              Text(
-                                "Warta Jemaat",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black54),
-                              )
-                            ],
-                          ),
-                          Column(
-                            children: <Widget>[
-                              Material(
-                                borderRadius: BorderRadius.circular(100.0),
-                                color: Color(0xffF0F5F7),
-                                child: IconButton(
-                                  padding: EdgeInsets.all(15.0),
-                                  icon: Icon(Icons.list),
-                                  color: Color(0xffB5574F),
-                                  iconSize: 30,
-                                  onPressed: () async {},
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10.0,
-                              ),
-                              Text(
-                                "Daftar Majelis",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black54),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
-        ),
-      ),
-    );
+        ));
   }
 }
 

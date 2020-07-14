@@ -31,6 +31,8 @@ dependencies:
   dropdownfield: ^1.0.3
   intl: ^0.16.1
 
+  shared_preferences: ^0.5.8
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -55,6 +57,7 @@ flutter:
    - assets/visi.png
    - assets/misi.png
    - assets/logo_black.png
+   - assets/download.jpg
   
 
   # An image asset can refer to one or more resolution-specific "variants", see
