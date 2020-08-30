@@ -19,11 +19,14 @@ class _SettingState extends State<Setting> {
   }
 
   var value;
+  var nama;
+  var wilayah;
   getPref() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     setState(() {
       value = pref.getInt("value");
-      
+      nama = pref.getString("nama_lengkap");
+      wilayah = pref.getString("wilayah_gereja");
     });
   }
 
@@ -31,7 +34,7 @@ class _SettingState extends State<Setting> {
     SharedPreferences pref = await SharedPreferences.getInstance();
     setState(() {
       value = 0;
-
+      Navigator.pop(context);
       Navigator.pushReplacement(this.context,
           MaterialPageRoute(builder: (BuildContext context) => Login()));
     });
@@ -40,8 +43,8 @@ class _SettingState extends State<Setting> {
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();
     getPref();
+    super.initState();
   }
 
   @override
@@ -100,12 +103,12 @@ class _SettingState extends State<Setting> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            "Yossie Ruben Advindo",
+                            nama,
                             style: TextStyle(
                                 fontSize: 24.0, fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            "Wilayah 90",
+                            "Wilayah $wilayah",
                             style: TextStyle(
                                 fontSize: 16.0, fontWeight: FontWeight.normal),
                           ),

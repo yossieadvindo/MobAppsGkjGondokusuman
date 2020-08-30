@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:gkjgondokusuman/Login.dart';
+import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
@@ -26,13 +29,86 @@ class _HomeState extends State<Home> {
     }
     return result;
   }
-
+  // List<dynamic> _dataDiri = List();
+  // dataDiri(){
+  //   getDatadiri(id_jemaat);
+  //   getDataDua(id_jemaat);
+  //   savePref();
+  // }
+  // Future<List> getDatadiri(String kj) async {
+  //   print(kj);
+  //   final response = await http.post(
+  //       'http://10.0.2.2/gondokusuman/api/getJemaat.php',
+  //       body: {"kode_jemaat": "$kj"});
+  //   var listData = jsonDecode(response.body);
+  //   setState(() {
+  //     _dataDiri = listData;
+    
+  //     //print(_dataDiri[0]["golongan_darah"]);
+  //   });
+  // }
+  // List<dynamic> _dataDua = List();
+  // Future<List> getDataDua(String kj) async {
+  //   final response = await http.post(
+  //       'http://10.0.2.2/gondokusuman/api/getJemaat2.php',
+  //       body: {"kode_jemaat": "$kj"});
+  //   var listData = jsonDecode(response.body);
+  //   setState(() {
+  //     _dataDua = listData;
+  //     //print(_dataDiri[0]["golongan_darah"]);
+  //   });
+  // }
+  // savePref() async {
+  //   SharedPreferences pref = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     pref.setInt("key", value);
+  //     pref.setString("golongan_darah", _dataDiri[0]['golangan_darah'].toString());
+  //     pref.setString("kode_jemaat", _dataDiri[0]['kode_jemaat'].toString());
+  //     pref.setString("no_kk", _dataDiri[0]['no_kk'].toString());
+  //     pref.setString("nama_lengkap", _dataDiri[0]['nama_lengkap'].toString());
+  //     pref.setString("hub_keluarga", _dataDiri[0]['hub_keluarga'].toString());
+      
+  //     pref.setString("wilayah_gereja", _dataDiri[0]['wilayah_gereja'].toString());
+      
+  //     pref.setString("tempat_lahir", _dataDiri[0]['tempat_lahir'].toString());
+  //     pref.setString("tanggal_lahir", _dataDiri[0]['tanggal_lahir'].toString());
+  //     pref.setString("jenis_kelamin", _dataDiri[0]['jenis_kelamin'].toString());
+      
+  //     pref.setString("Alamat", _dataDiri[0]['Alamat'].toString());
+  //     pref.setString("no_hp", _dataDiri[0]['no_hp'].toString());
+  //     pref.setString("no_tlpn", _dataDiri[0]['no_tlpn'].toString());
+  //     pref.setString("pekerjaan", _dataDiri[0]['pekerjaan'].toString());
+      
+  //     pref.setString("pendidikan", _dataDiri[0]['pendidikan'].toString());
+  //     pref.setString("nama_ayah", _dataDiri[0]['nama_ayah'].toString());
+  //     pref.setString("nama_ibu", _dataDiri[0]['nama_ibu'].toString());
+  //     pref.setString("status_nikah", _dataDiri[0]['status_nikah'].toString());
+      
+  //     pref.setString("tgl_nikah", _dataDiri[0]['tgl_nikah'].toString());
+  //     pref.setString("gereja_nikah", _dataDiri[0]['gereja_nikah'].toString());
+  //     pref.setString("pendeta_nikah", _dataDiri[0]['pendeta_nikah'].toString());
+  //     pref.setString("nama_suamiistri", _dataDiri[0]['nama_suamiistri'].toString());
+  //       pref.setString("pndk", _dataDua[0]['pendidikan'].toString());
+  //     pref.setString("GD", _dataDua[0]['golangan_darah'].toString());
+  //     pref.setString("SN", _dataDua[0]['status_nikah'].toString());
+  //     pref.setString("pkrj", _dataDua[0]['pekerjaan'].toString());
+  //     pref.setString("JK", _dataDua[0]['jenis_kelamin'].toString());
+  //     pref.setString("WG", _dataDua[0]['wilayah_gereja'].toString());
+  //     pref.setString("HK", _dataDua[0]['hub_keluarga'].toString());
+  //     pref.commit();
+  //     print(pref.getString("golongan_darah"));
+  //   });
+  // }
   var value;
+  String wilayah;
+  var id_jemaat;
   getPref() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     setState(() {
       value = pref.getInt("value");
-      nama = pref.getString("username");
+      nama = pref.getString('nama_lengkap');
+      wilayah = pref.getString("wilayah_gereja");
+      //id_jemaat = pref.getString("kode_jemaat");
       // value == 1
       //     ? Navigator.pushReplacement(this.context,
       //         MaterialPageRoute(builder: (BuildContext context) => Home()))
@@ -44,8 +120,8 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();
     getPref();
+    super.initState();
   }
 
   @override
@@ -128,7 +204,7 @@ class _HomeState extends State<Home> {
                                             fontWeight: FontWeight.bold),
                                       ),
                                       Text(
-                                        "Wilayah 90",
+                                        "Wilayah $wilayah",
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.normal),
@@ -250,6 +326,7 @@ class _HomeState extends State<Home> {
                                         color: Color(0xff2BAECB),
                                         iconSize: 30,
                                         onPressed: () async {
+                                          //dataDiri();
                                           Navigator.pushNamed(context, '/akun');
                                         },
                                       ),

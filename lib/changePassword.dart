@@ -16,7 +16,7 @@ class _GantiPasswordState extends State<GantiPassword> {
 
   Color background = Color(0xffFAFAFA);
   Color icon = Colors.blue;
-  Color border_focus = Colors.black45;
+  Color border_focus = Colors.black;
   jarak() {
     return SizedBox(
       height: 10.0,
@@ -116,7 +116,11 @@ class _GantiPasswordState extends State<GantiPassword> {
         FlatButton(
             color: Colors.blue,
             onPressed: () {
-              Navigator.pushReplacementNamed(context, '/setting');
+              Navigator.pop(context);
+              Navigator.pushReplacement(
+                  this.context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => Setting()));
             },
             child: Text("Yes")),
       ],
@@ -152,18 +156,19 @@ class _GantiPasswordState extends State<GantiPassword> {
     // TODO: implement initState
     super.initState();
     getPref();
-    
   }
-  void pop(){
+
+  void pop() {
     Navigator.pop(context);
   }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
         pop();
-      }  ,
-          child: Scaffold(
+      },
+      child: Scaffold(
         appBar: AppBar(
           title: Text(
             "Ganti Password",
